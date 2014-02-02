@@ -1,0 +1,19 @@
+# This file is managed by ansible. Any changes you make will be overwritten next time ansible is run.
+NameVirtualHost {% if apache2_ports_default_namevirtualhost is defined %}{{ apache2_ports_default_namevirtualhost }}{% else %}*:80{% endif %}
+
+Listen 80
+
+<IfModule mod_ssl.c>
+    # If you add NameVirtualHost *:443 here, you will also have to change
+    # the VirtualHost statement in /etc/apache2/sites-available/default-ssl
+    # to <VirtualHost *:443>
+    # Server Name Indication for SSL named virtual hosts is currently not
+    # supported by MSIE on Windows XP.
+    Listen {% if apache2_ports_default_ssllisten is defined %}{{ apache2_ports_default_ssllisten }}{% else %}443{% endif %}
+
+</IfModule>
+
+<IfModule mod_gnutls.c>
+    Listen {% if apache2_ports_default_gnutlslisten is defined %}{{ apache2_ports_default_gnutlslisten }}{% else %}443{% endif %}
+    
+</IfModule>

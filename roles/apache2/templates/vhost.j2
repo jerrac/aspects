@@ -1,0 +1,208 @@
+# This file is managed by ansible. Any changes you make will be overwritten next time ansible is run.
+<VirtualHost *:80>
+  {% if item[1].server_admin is defined and item[1].server_admin !=false %}
+  ServerAdmin {{ item[1].server_admin }}
+  {% else %}
+  ServerAdmin {{ apache2_vhosts_defaults[1].server_admin }}
+  {% endif %}
+
+  {% if item[1].server_name is defined and item[1].server_name !=false %}
+  ServerName {{ item[1].server_name }}
+  {% else %}
+  {{ apache2_vhosts_defaults[1].server_name }}
+  {% endif %}
+
+  {% if item[1].server_aliases is defined and item[1].server_aliases !=false %}
+  ServerAlias {{ item[1].server_aliases }}
+  {% else %}
+  {{ apache2_vhosts_defaults[1].server_aliases }}
+  {% endif %}
+
+  {% if item[1].docroot is defined and item[1].docroot !=false %}
+  DocumentRoot {{ item[1].docroot }}
+  {% else %}
+  {{ apache2_vhosts_defaults[1].docroot }}
+  {% endif %}
+
+  <Directory />
+    Options +FollowSymLinks
+    AllowOverride None
+  </Directory>
+
+  {% if item[1].docroot is defined and item[1].docroot !=false %}
+  <Directory DocumentRoot {{ item[1].docroot }}>
+  {% else %}
+  <Directory {{ apache2_vhosts_defaults[1].docroot }}>
+  {% endif %}
+    {% if item[1].docroot_directory_options is defined and item[1].docroot_directory_options !=false %}
+    {{ item[1].docroot_directory_options }}
+    {% else %}
+  {{ apache2_vhosts_defaults[1].docroot_directory_options }}
+  {% endif %}
+  </Directory>
+
+  {% if item[1].extra_directives is defined %}
+  {{ item[1].extra_directives }}
+  {% else %}
+  {{ apache2_vhosts_defaults[1].extra_directives }}
+  {% endif %}
+
+  {% if item[1].server_name is defined and item[1].server_name !=false %}
+  ErrorLog ${APACHE_LOG_DIR}/{{ item[1].server_name }}.error.log
+  {% else %}
+  ErrorLog ${APACHE_LOG_DIR}/{{ apache2_vhosts_defaults[1].server_name }}.error.log
+  {% endif %}
+  # Possible values include: debug, info, notice, warn, error, crit,
+  # alert, emerg.
+  {% if item[1].log_level is defined %}
+  LogLevel {{ item[1].log_level }}
+  {% else %}
+  LogLevel {{ apache2_vhosts_defaults[1].log_level }}
+  {% endif %}
+
+  {% if item[1].server_name is defined and item[1].server_name !=false %}
+  CustomLog ${APACHE_LOG_DIR}/{{ item[1].server_name }}.log combined
+  {% else %}
+  CustomLog ${APACHE_LOG_DIR}/{{ apache2_vhosts_defaults[1].server_name }}.log combined
+  {% endif %}
+
+  {% if item[1].ssl is defined and item[1].ssl.enabled != false and item[1].ssl.rewrite_to_https == yes %}
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+  {% endif %}
+</VirtualHost>
+
+{% if item[1].ssl is defined and item[1].ssl.enabled != false %}
+<IfModule mod_ssl.c>
+<VirtualHost *:443>
+    {% if item[1].server_admin is defined and item[1].server_admin !=false %}
+  ServerAdmin {{ item[1].server_admin }}
+  {% else %}
+  ServerAdmin {{ apache2_vhosts_defaults[1].server_admin }}
+  {% endif %}
+
+  {% if item[1].server_name is defined and item[1].server_name !=false %}
+  ServerName {{ item[1].server_name }}
+  {% else %}
+  {{ apache2_vhosts_defaults[1].server_name }}
+  {% endif %}
+
+  {% if item[1].server_aliases is defined and item[1].server_aliases !=false %}
+  ServerAlias {{ item[1].server_aliases }}
+  {% else %}
+  {{ apache2_vhosts_defaults[1].server_aliases }}
+  {% endif %}
+
+  {% if item[1].docroot is defined and item[1].docroot !=false %}
+  DocumentRoot {{ item[1].docroot }}
+  {% else %}
+  {{ apache2_vhosts_defaults[1].docroot }}
+  {% endif %}
+
+  <Directory />
+    Options +FollowSymLinks
+    AllowOverride None
+  </Directory>
+
+  {% if item[1].docroot is defined and item[1].docroot !=false %}
+  <Directory DocumentRoot {{ item[1].docroot }}>
+  {% else %}
+  <Directory {{ apache2_vhosts_defaults[1].docroot }}>
+  {% endif %}
+    {% if item[1].docroot_directory_options is defined and item[1].docroot_directory_options !=false %}
+    {{ item[1].docroot_directory_options }}
+    {% else %}
+  {{ apache2_vhosts_defaults[1].docroot_directory_options }}
+  {% endif %}
+  </Directory>
+
+  {% if item[1].extra_directives is defined %}
+  {{ item[1].extra_directives }}
+  {% else %}
+  {{ apache2_vhosts_defaults[1].extra_directives }}
+  {% endif %}
+
+  {% if item[1].server_name is defined and item[1].server_name !=false %}
+  ErrorLog ${APACHE_LOG_DIR}/{{ item[1].server_name }}.ssl.error.log
+  {% else %}
+  ErrorLog ${APACHE_LOG_DIR}/{{ apache2_vhosts_defaults[1].server_name }}.ssl.error.log
+  {% endif %}
+  # Possible values include: debug, info, notice, warn, error, crit,
+  # alert, emerg.
+  {% if item[1].log_level is defined %}
+  LogLevel {{ item[1].log_level }}
+  {% else %}
+  LogLevel {{ apache2_vhosts_defaults[1].log_level }}
+  {% endif %}
+
+  {% if item[1].server_name is defined and item[1].server_name !=false %}
+  CustomLog ${APACHE_LOG_DIR}/{{ item[1].server_name }}.ssl.log combined
+  {% else %}
+  CustomLog ${APACHE_LOG_DIR}/{{ apache2_vhosts_defaults[1].server_name }}.ssl.log combined
+  {% endif %}
+ 
+  #   SSL Info
+  SSLEngine on
+  {% if item[1].ssl.cert_authority is defined %}
+  SSLCACertificateFile {{ item[1].server_name }}.authcert
+  {% else %}
+  {% if apache2_vhosts_defaults[1].ssl.cert_authority != false %}
+  SSLCACertificateFile {{ apache2_vhosts_defaults[1].server_name }}.authcert
+  {% endif %}
+  {% endif %}
+
+  {% if item[1].ssl.site_cert is defined %}
+  SSLCertificateFile {{ item[1].server_name }}.authcert
+  {% else %}
+  {% if apache2_vhosts_defaults[1].ssl.site_cert != false %}
+  SSLCertificateFile {{ apache2_vhosts_defaults[1].server_name }}.cert
+  {% endif %}
+  {% endif %}
+
+  {% if item[1].ssl.private_key is defined %}
+  SSLCertificateKeyFile {{ item[1].server_name }}.key
+  {% else %}
+  {% if apache2_vhosts_defaults[1].ssl.private_key != false %}
+  SSLCertificateKeyFile {{ apache2_vhosts_defaults[1].server_name }}.key
+  {% endif %}
+  {% endif %}
+
+  {% if item[1].ssl.site_chain_file is defined %}
+  SSLCertificateChainFile {{ item[1].server_name }}.chainfile
+  {% else %}
+  {% if apache2_vhosts_defaults[1].ssl.site_chain_file != false %}
+  SSLCertificateChainFile {{ apache2_vhosts_defaults[1].server_name }}.chainfile
+  {% endif %}
+  {% endif %}
+
+  {% if item[1].ssl.honor_cipher_order is defined %}
+  SSLHonorCipherOrder {{ item[1].ssl.honor_cipher_order }}
+  {% else %}
+  {% if apache2_vhosts_defaults[1].ssl.honor_cipher_order != false %}
+  SSLHonorCipherOrder {{ apache2_vhosts_defaults[1].ssl.honor_cipher_order }}
+  {% endif %}
+  {% endif %}
+
+  {% if item[1].ssl.cipher_suite is defined %}
+  SSLCipherSuite {{ item[1].ssl.cipher_suite }}
+  {% else %}
+  {% if apache2_vhosts_defaults[1].ssl.cipher_suite != false %}
+  SSLCipherSuite {{ apache2_vhosts_defaults[1].ssl.cipher_suite }}
+  {% endif %}
+  {% endif %}
+ 
+  <FilesMatch "\.(cgi|shtml|phtml|php)$">
+    SSLOptions +StdEnvVars
+  </FilesMatch>
+  <Directory /usr/lib/cgi-bin>
+    SSLOptions +StdEnvVars
+  </Directory>
+  BrowserMatch "MSIE [2-6]" \
+          nokeepalive ssl-unclean-shutdown \
+          downgrade-1.0 force-response-1.0
+  # MSIE 7 and newer should be able to use keepalive
+  BrowserMatch "MSIE [7-9]" ssl-unclean-shutdown
+</VirtualHost>
+</IfModule>
+{% endif %}

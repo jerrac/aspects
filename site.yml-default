@@ -1,0 +1,8 @@
+---
+# file: site.yml
+# Uncomment the appropriate lines below.
+# Rename to site.yml
+
+#- hosts: all
+#  roles:
+#    - apache2

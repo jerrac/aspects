@@ -1,0 +1,79 @@
+---
+# file: roles/apache2/tasks/apache2.yml
+
+- name: ensure apache2 is installed
+  action: apt pkg=apache2-mpm-prefork state=latest
+  notify:
+   - start apache2
+  tags:
+    - webserver
+    - apache2
+
+- name: create sites-available and sites-enabled directories
+  file: state=directory path={{ item }} mode=0775 owner=root group=root
+  with_items:
+    - "/etc/apache2/sites-available"
+    - "/etc/apache2/sites-enabled"
+  tags:
+    - apache2
+
+- name: install apache2 php mod
+  when: apache2.enable_php OR apache2_defaults.enable_php
+  action: apt pkg=libapache2-mod-php5 state=latest
+  notify:
+   - restart apache2
+  tags:
+    - apache2
+
+- name: disable default vhost
+  command: a2dissite default
+  notify:
+   - restart apache2
+  tags:
+    - webserver
+    - apache2
+
+- name: disable default-ssl vhost
+  command: a2dissite default-ssl
+  notify:
+   - restart apache2
+  tags:
+    - webserver
+    - apache2
+
+- name: disable unneeded apache modules
+  command: a2dismod {{ item }}
+  with_items:
+   - status
+  notify:
+   - restart apache2
+  tags:
+    - webserver
+    - apache2
+
+- name: enable needed apache2 modules
+  command: a2enmod {{ item }}
+  with_items:
+   - ssl
+   - rewrite
+  notify:
+   - restart apache2
+  tags:
+    - webserver
+    - apache2
+
+- name: set apache2 ports.conf template
+  template: src=ports.conf.j2 dest=/etc/apache2/ports.conf
+  notify:
+    - restart apache2
+  tags:
+    - webserver
+    - apache2
+
+- name: set apache2 apache2.conf template
+  template: src=apache2.conf.j2 dest=/etc/apache2/apache2.conf
+  notify:
+    - restart apache2
+  tags:
+    - webserver
+    - apache2
