@@ -30,7 +30,7 @@
   </Directory>
 
   {% if item[1].docroot is defined and item[1].docroot !=false %}
-  <Directory DocumentRoot {{ item[1].docroot }}>
+  <Directory {{ item[1].docroot }}>
   {% else %}
   <Directory {{ apache2_vhosts_defaults[1].docroot }}>
   {% endif %}
@@ -106,7 +106,7 @@
   </Directory>
 
   {% if item[1].docroot is defined and item[1].docroot !=false %}
-  <Directory DocumentRoot {{ item[1].docroot }}>
+  <Directory {{ item[1].docroot }}>
   {% else %}
   <Directory {{ apache2_vhosts_defaults[1].docroot }}>
   {% endif %}
