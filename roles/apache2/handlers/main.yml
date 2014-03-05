@@ -11,3 +11,15 @@
 
 - name: stop apache2
   service: name=apache2 state=stopped
+
+- name: restart httpd
+  service: name=httpd state=restarted enabled=yes
+
+- name: reload httpd
+  service: name=httpd state=reloaded enabled=yes
+
+- name: start httpd
+  service: name=httpd state=started enabled=yes
+
+- name: stop httpd
+  service: name=httpd state=stopped

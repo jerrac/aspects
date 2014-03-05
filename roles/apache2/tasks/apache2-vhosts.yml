@@ -47,50 +47,9 @@
     - apache2
     - vhosts
 
-# copy default ssl certs if they exist
-- name: copy default Certificate Authority cert to apache dest.
-  when: item[1].ssl.cert_authority
-  copy: src={{ item[1].ssl.cert_authority }} dest=/etc/apache2/ssl/{{ item[1].server_name }}.authcert owner=root group=root mode=0644
-  with_items: apache2_vhosts_defaults|dictsort
-  notify:
-   - restart apache2
-  tags:
-    - apache2
-    - vhosts
-
-- name: copy default main ssl certificate to apache dest.
-  when: item[1].ssl.site_cert
-  copy: src={{ item[1].ssl.site_cert }} dest=/etc/apache2/ssl/{{ item[1].server_name }}.cert owner=root group=root mode=0644
-  with_items: apache2_vhosts_defaults|dictsort
-  notify:
-   - restart apache2
-  tags:
-    - apache2
-    - vhosts
-
-- name: copy default private key file to apache dest.
-  when: item[1].ssl.private_key
-  copy: src={{ item[1].ssl.private_key }} dest=/etc/apache2/ssl/{{ item[1].server_name }}.key owner=root group=root mode=0644
-  with_items: apache2_vhosts_defaults|dictsort
-  notify:
-   - restart apache2
-  tags:
-    - apache2
-    - vhosts
-
-- name: copy default chain file to apache dest.
-  when: item[1].ssl.site_chain_file
-  copy: src={{ item[1].ssl.site_chain_file }} dest=/etc/apache2/ssl/{{ item[1].server_name }}.chainfile owner=root group=root mode=0644
-  with_items: apache2_vhosts_defaults|dictsort
-  notify:
-   - restart apache2
-  tags:
-    - apache2
-    - vhosts
-
 # deal with vhosts
-- name: create and enable vhosts 
-  when: apache2_vhosts is defined
+- name: create and enable vhosts Debian style 
+  when: apache2_vhosts is defined and ansible_os_family == "Debian"
   template: src=vhost.j2 dest=/etc/apache2/sites-available/{{ item[1].server_name }}
   with_items: apache2_vhosts|dictsort
   notify:
@@ -99,8 +58,8 @@
     - apache2
     - vhosts
 
-- name: enable vhosts by creating symlinks
-  when: item[1].enabled
+- name: enable vhosts by creating symlinks Debian style
+  when: item[1].enabled and ansible_os_family == "Debian"
   file: state=link path=/etc/apache2/sites-enabled/{{ item[1].server_name }} src=/etc/apache2/sites-available/{{ item[1].server_name }}
   with_items: apache2_vhosts|dictsort
   notify:
@@ -109,12 +68,32 @@
     - apache2
     - vhosts
 
-- name: disable vhosts by removing symlinks in sites-enabled
-  when: item[1].enabled == false
+- name: disable vhosts by removing symlinks in sites-enabled Debian style
+  when: item[1].enabled == false and ansible_os_family == "Debian"
   file: state=absent path=/etc/apache2/sites-enabled/{{ item[1].server_name }}
   with_items: apache2_vhosts|dictsort
   notify:
    - restart apache2
+  tags:
+    - apache2
+    - vhosts
+
+- name: create and enable vhosts RedHat style
+  when: apache2_vhosts is defined and ansible_os_family == "RedHat"
+  template: src=vhost.j2 dest=/etc/httpd/conf.d/{{ item[1].server_name }}.conf
+  with_items: apache2_vhosts|dictsort
+  notify:
+   - restart httpd
+  tags:
+    - apache2
+    - vhosts
+
+- name: disable vhosts by removing vhost files RedHat style
+  when: item[1].enabled == false and ansible_os_family == "RedHat"
+  file: state=absent path=/etc/httpd/conf.d/{{ item[1].server_name }}.conf
+  with_items: apache2_vhosts|dictsort
+  notify:
+   - restart httpd
   tags:
     - apache2
     - vhosts

@@ -1,8 +1,8 @@
 ---
 # file: roles/apache2/defaults/main.yml
-apache2_defaults:
+apache2:
   enable_php: false
-apache2_vhosts_defaults:
+apache2_vhosts:
   default:
     server_name: localhost
     enabled: false
@@ -10,7 +10,7 @@ apache2_vhosts_defaults:
     server_aliases: "www.localhost.example"
     docroot: "/var/www/"
     docroot_directory_options: |
-      Options FollowSymLinks -Indexes -MultiViews
+      Options +FollowSymLinks -Indexes -MultiViews
       AllowOverride All
       Order allow,deny
       allow from all
@@ -26,9 +26,17 @@ apache2_vhosts_defaults:
     extra_directives: "# extra_directives"
     log_level: warn
 
-apache2_enable_modules:
-  - /etc/apache2/mods-enabled/
+apache2_enable_debian_modules:
+  modrewrite:
+    path: /etc/apache2/mods-enabled/rewrite.load
+    src: /etc/apache2/mods-available/rewrite.load
+  modsslconf:
+    path: /etc/apache2/mods-enabled/ssl.conf
+    src: /etc/apache2/mods-available/ssl.conf
+  modsslload:
+    path: /etc/apache2/mods-enabled/ssl.load
+    src: /etc/apache2/mods-available/ssl.load
 
-apache2_disable_modules:
+apache2_disable_debian_modules:
   - /etc/apache2/mods-enabled/status.load
   - /etc/apache2/mods-enabled/status.conf
