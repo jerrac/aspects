@@ -6,3 +6,4 @@
 #- hosts: all
 #  roles:
 #    - apache2
+#    - php
