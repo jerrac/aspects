@@ -1,0 +1,13 @@
+---
+# file: roles/apache2/handlers/main.yml
+- name: restart apache2
+  service: name=apache2 state=restarted enabled=yes
+
+- name: reload apache2
+  service: name=apache2 state=reloaded enabled=yes
+
+- name: start apache2
+  service: name=apache2 state=started enabled=yes
+
+- name: stop apache2
+  service: name=apache2 state=stopped

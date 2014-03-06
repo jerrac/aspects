@@ -1,0 +1,48 @@
+---
+# file: roles/php/tasks/php5.yml
+
+- name: ensure php5 is installed Debian style
+  when: ansible_os_family == "Debian"
+  apt: state=present pkg=php5
+  tags:
+    - php5
+
+- name: ensure php5 is installed RedHat style
+  when: ansible_os_family == "RedHat"
+  yum: state=present pkg=php
+  tags:
+    - php5
+
+- name: ensure common php extensions are latest Debian style
+  when: ansible_os_family == "Debian" and item[1].debian !=0
+  apt: state=latest pkg={{ item[1].debian }}
+  with_items: php_extensions|dictsort
+  notify:
+   - restart apache2
+  tags:
+    - php5
+
+- name: ensure common php extensions are latest RedHat style
+  when: ansible_os_family == "RedHat" and item[1].redhat !=0
+  yum: state=latest pkg={{ item[1].redhat }}
+  with_items: php_extensions|dictsort
+  notify:
+   - restart apache2
+  tags:
+    - php5
+
+- name: add php.ini overrides to end of php.ini file Debian style
+  when: ansible_os_family == "Debian"
+  lineinfile: state=present dest="/etc/php5/apache2/php.ini" insertafter=EOF line="{{ item }}"
+  with_items: php_ini_overrides|dictsort
+  tags:
+    - phpinitemplate
+    - php5
+
+- name: add php.ini overrides to end of php.ini file RedHat style
+  when: ansible_os_family == "RedHat"
+  lineinfile: state=present dest="/etc/php.ini" insertafter=EOF line="{{ item }}"
+  with_items: php_ini_overrides|dictsort
+  tags:
+    - phpinitemplate
+    - php5

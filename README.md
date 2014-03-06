@@ -8,7 +8,10 @@ You should be familiar with the official Ansible documentation at http://docs.an
 ## Roles
 Name | Status | Supported OS's | Notes
 -----|--------|----------------|------
-Apache2 | Testing | * Ubuntu 12.04 | Currently only Apache 2.2. Apache 2.4 will get its own role.
+Apache2 | Testing | * Ubuntu 12.04 
+* CentOS 6.5 | Currently only Apache 2.2. Apache 2.4 will get its own role.
+PHP | Testing | * Ubuntu 12.04 
+* CentOS 6.5 | Currently testing PHP 5.3. Older versions will not be supported. Newer versions should work, but there may be issues.
 
 ## Setup
 * Set ```hash_behaviour=merge``` in your ansible.cfg file. You can copy the default that comes with Aspects, or set in whatever default configureation file you choose to use. See the official documentation on where to find them, and what other options you can use.

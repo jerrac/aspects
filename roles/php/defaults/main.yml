@@ -1,0 +1,44 @@
+---
+php_ini_overrides:
+  memorylimit: "memory_limit=256M"
+  errorlog: "error_log=syslog"
+php_apc_ini_lines:
+  apcenable: 
+    replace: "extension*"
+    replace_with: "extension=apc.so"
+  apc_shm_size: 
+    replace: "apc.shm_size*"
+    replace_with: "apc.shm_size=128M"
+
+# block extensions in host or group vars files by setting the package to 0.
+php_extensions:
+  curl:
+    redhat: php-common
+    debian: php5-curl
+  gd:
+    redhat: php-gd
+    debian: php5-gd
+  imagick:
+    redhat: 0 # install via pecl
+    debian: php5-imagick
+  ldap:
+    redhat: php-ldap
+    debian: php5-ldap
+  mcrypt:
+    redhat: 0 # Not sure how to get this on centos 6.5
+    debian: php5-mcrypt
+  mysql:
+    redhat: php-mysql
+    debian: php5-mysql
+  apc:
+    redhat: php-pecl-apc
+    debian: php-apc
+  crypt-blowfish:
+    redhat: 0 # Not sure how to get this on centos 6.5
+    debian: php-crypt-blowfish
+  pear:
+    redhat: php-pear
+    debian: php-pear
+  dev:
+    redhat: 0 # Not sure how to get this on centos 6.5
+    debian: php5-dev

@@ -1,0 +1,35 @@
+---
+# file: roles/php/tasks/apc.yml
+- name: install apc package Debian style
+  when: ansible_os_family == "Debian"
+  apt: state=latest pkg=php-apc
+  notify:
+   - restart apache2
+  tags:
+    - php5
+    - apc
+
+- name: install apc package RedHat style
+  when: ansible_os_family == "RedHat"
+  yum: state=latest pkg=php-pecl-apc
+  notify:
+   - restart httpd
+  tags:
+    - php5
+    - apc
+
+- name: add php.ini overrides to end of php.ini file Debian style
+  when: ansible_os_family == "Debian"
+  lineinfile: state=present dest="/etc/php5/conf.d/apc.ini" regexp="{{ item[1].replace }}" line="{{ item[1].replace_with }}"
+  with_items: php_apc_ini_lines|dictsort
+  tags:
+    - php5
+    - apc
+
+- name: add php.ini overrides to end of php.ini file RedHat style
+  when: ansible_os_family == "RedHat"
+  lineinfile: state=present dest="/etc/php.d/apc.ini" regexp="{{ item[1].replace }}" line="{{ item[1].replace_with }}"
+  with_items: php_apc_ini_lines|dictsort
+  tags:
+    - php5
+    - apc
