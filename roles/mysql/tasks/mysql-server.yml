@@ -1,0 +1,25 @@
+---
+# file: roles/mysql/tasks/mysql-server.yml
+
+- name: ensure mysql-server is installed
+  action: apt pkg=mysql-server state=latest
+  tags:
+    - mysql
+
+- name: ensure mysql-client is installed
+  action: apt pkg=mysql-client state=latest
+  tags:
+    - mysql
+    - mysqlclientinstall
+
+- name: template /etc/mysql/my.cnf
+  template: src=etc-mysql-my.cnf.j2 dest=/etc/mysql/my.cnf owner=root group=root mode=0644
+  notify: restart mysql
+  tags:
+    - mysql
+
+- name: Disable Apparmor for mysql
+  file: state=link src=/etc/apparmor.d/usr.sbin.mysqld path=/etc/apparmor.d/disable/usr.sbin.mysqld
+  notify: remove apparmor mysql profile
+  tags:
+    - mysql

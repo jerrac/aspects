@@ -1,0 +1,37 @@
+---
+# file: roles/mysql/defaults/main.yml
+#mysql_root_user: root
+#
+#mysql:
+#  firstrun: false
+#  change_root_password: false
+#  root_password: password
+#
+#mysql_databases:
+#  - name: database_name
+#    host: localhost
+#    collation: utf8mb4_unicode_ci
+#    encoding: utf8mb4
+#
+#mysql_users:
+#  - name: username
+#    password: "password"
+#    host: "localhost"
+#    dbhost: "localhost"
+#    priv: "database.table:Privs"
+#mysqlcnf_mysqld_safe_extra_lines:
+#mysqlcnf_mysqldump_extra_lines:
+#mysqlcnf_mysql_extra_lines:
+#mysqlcnf_isamchk_extra_lines:
+#mysqlcnf_mysqld_extra_lines: 
+#  - "query_cache_size = 256M"
+#  - "innodb_buffer_pool_size = 4G"
+#  - "innodb_log_file_size = 128M"
+#  - "innodb_open_files = 400"
+#  - "innodb_read_io_threads = 8"
+#  - "innodb_write_io_threads = 8"
+#  - "table_definition_cache = 800"
+#  - "table_open_cache = 1000"
+#  - "join_buffer_size = 8M"
+#  - "tmp_table_size = 128M"
+#  - "max_heap_table_size = 128M"
