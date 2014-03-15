@@ -6,9 +6,9 @@ Default vars are contained in roles/apache2/defaults/main.yml.
 Their initial state is:
 
 ```yaml
-apache2_defaults:
+apache2:
   enable_php: false
-apache2_vhosts_defaults:
+apache2_vhosts:
   default:
     server_name: localhost
     enabled: false
@@ -38,7 +38,7 @@ apache2_vhosts_defaults:
     log_level: warn
 ```
 
-Host or group specific vars are set in their appropriate var files. Simply use the same variables from the defaults, renaming ```apache2_defaults``` to ```apache2``` and ```apache2_vhosts_defaults``` to ```apache2_vhosts```.
+Host or group specific vars are set in their appropriate var files. Simply add a new site.
 
 For example:
 

@@ -1,0 +1,6 @@
+# List each host under the groups named the same as the role you want
+# to apply. Remember, some roles combine other roles.
+
+[apache]
+
+[php]
