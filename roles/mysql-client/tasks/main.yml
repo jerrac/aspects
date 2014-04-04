@@ -1,0 +1,7 @@
+---
+# file: roles/mysql-client/tasks/main.yml
+- name: ensure mysql-client is installed
+  when: ansible_os_family == "Debian"
+  apt: pkg=mysql-client state=latest
+  tags:
+    - mysql-client

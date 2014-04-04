@@ -1,6 +1,12 @@
+# file: hosts-default
 # List each host under the groups named the same as the role you want
 # to apply. Remember, some roles combine other roles.
+# Keep empty roles commented out.
 
-[apache]
+#[apache]
 
-[php]
+#[php]
+
+#[mysql-server]
+
+#[mysql-client]

@@ -2,6 +2,7 @@
 # file: roles/mysql/tasks/main.yml
 
 - name: ansible mysql needs python-mysqldb installed
+  when: ansible_os_family == "Debian"
   apt: state=present pkg=python-mysqldb
   tags:
     - mysql
