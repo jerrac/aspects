@@ -2,8 +2,8 @@
 # file: roles/mysql/tasks/databases.yml
 # create server db's
 - name: ensure mysql_databases exist
-  mysql_db: state=present name="{{ item.name }}" login_host="127.0.0.1" login_user="{{ mysql-server_root_user }}" login_password="{{ mysql-server_root_password }}" collation="{{ item.collation }}" encoding="{{ item.encoding }}"
-  with_items: mysql-server_databases|default([])
+  mysql_db: state=present name="{{ item.name }}" login_host="127.0.0.1" login_user="{{ mysql_server_root_user }}" login_password="{{ mysql_server.root_password }}" collation="{{ item.collation }}" encoding="{{ item.encoding }}"
+  with_items: mysql_server_databases|default([])
   tags:
-    - mysql-server
+    - mysql_server
     - mysql_databases

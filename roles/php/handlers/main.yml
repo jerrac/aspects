@@ -1,5 +1,5 @@
 ---
-# file: roles/apache2/handlers/main.yml
+# file: roles/php/handlers/main.yml
 - name: restart apache2
   service: name=apache2 state=restarted enabled=yes
 

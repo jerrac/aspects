@@ -6,5 +6,7 @@
   apt: state=present pkg=python-mysqldb
   tags:
     - mysql
-- include: mysql-server.yml
-- include: mysql-databases.yml
+- include: mysql_server.yml
+- include: root_user.yml
+- include: databases.yml
+- include: users.yml
