@@ -1,0 +1,48 @@
+---
+# file: roles/owncloud/tasks/main.yml
+#- debug: msg={{ item[1].version }}
+#  with_items: owncloud_instances|dictsort
+#  tags:
+#    - ownclouddebug
+
+- name: ensure git is installed
+  when: ansible_os_family == "Debian"
+  apt: pkg=git state=latest
+  tags:
+    - owncloud
+
+- name: Checkout owncloud into designated docroot
+  git: force=yes recursive=yes version="{{ item[1].version }}" depth=1 dest="{{ item[1].docroot }}" repo="{{ item[1].repo }}"
+  with_items: owncloud_instances|dictsort
+  tags:
+    - owncloud
+
+- name: Set upload_max_filesize in .htaccess file.
+  lineinfile: regexp="/php_value upload_max_filesize [\d]+[KMG]?/" line="php_value upload_max_filesize {{ item[1].upload_max_filesize }}" dest="{{ item[1].docroot }}/.htaccess"
+  with_items: owncloud_instances|dictsort
+  tags:
+    - owncloud
+
+- name: Set post_max_size in .htaccess file.
+  lineinfile: regexp="/php_value post_max_size [\d]+[KMG]?/" line="php_value post_max_size {{ item[1].post_max_size }}" dest="{{ item[1].docroot }}/.htaccess"
+  with_items: owncloud_instances|dictsort
+  tags:
+    - owncloud
+
+- name: Create data directory
+  file: state=directory path="{{ item[1].config.datadirectory }}" owner={{ item[1].server_user }} group={{ item[1].server_group }} mode=0770 recurse=yes
+  with_items: owncloud_instances|dictsort
+  tags:
+    - owncloud
+
+- name: Set docroot directory permissions
+  file: state=directory path="{{ item[1].docroot }}" owner={{ item[1].server_user }} group={{ item[1].server_group }} mode=0755 recurse=yes
+  with_items: owncloud_instances|dictsort
+  tags:
+    - owncloud
+
+- name: Run config template
+  template: src=config.php.j2 dest={{ item[1].docroot }}/config/config.php owner={{ item[1].server_user }} group={{ item[1].server_group }} mode=0640
+  with_items: owncloud_instances|dictsort
+  tags:
+    - owncloud
