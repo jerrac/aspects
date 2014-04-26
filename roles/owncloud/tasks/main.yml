@@ -41,8 +41,14 @@
   tags:
     - owncloud
 
-- name: Run config template
-  template: src=config.php.j2 dest={{ item[1].docroot }}/config/config.php owner={{ item[1].server_user }} group={{ item[1].server_group }} mode=0640
-  with_items: owncloud_instances|dictsort
+- name: Set custom config values in config/config.php.
+  lineinfile: regexp="{{ item.regex }}" line="{{ item.value }}" dest="{{ item[1].docroot }}/config/config.php"
+  with_items: owncloud_instances.config|dictsort
   tags:
     - owncloud
+
+#- name: Run config template
+#  template: src=config.php.j2 dest={{ item[1].docroot }}/config/config.php owner={{ item[1].server_user }} group={{ item[1].server_group }} mode=0640
+#  with_items: owncloud_instances|dictsort
+#  tags:
+#    - owncloud
