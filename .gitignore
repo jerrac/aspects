@@ -1,6 +1,6 @@
 # ignore sublime text project file
 *sublime-*
-
+.idea/*
 # ignore anything in tmp folder
 tmp/*
 
