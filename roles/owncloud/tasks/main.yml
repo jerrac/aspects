@@ -11,8 +11,23 @@
   tags:
     - owncloud
 
-- name: Checkout owncloud into designated docroot
+- name: register if the owncloud docroot already exists
+  stat: path={{ item[1].docroot }}
+  with_items: owncloud_instances|dictsort
+  register: stat_owncloud_docroot
+  tags:
+    - owncloud
+
+- name: Clone owncloud into designated docroot
   git: force=yes recursive=yes version="{{ item[1].version }}" depth=1 dest="{{ item[1].docroot }}" repo="{{ item[1].repo }}"
+  when: stat_owncloud_docroot.results[0].stat.isdir is not defined or stat_owncloud_docroot.results[0].stat.isdir != true
+  with_items: owncloud_instances|dictsort
+  tags:
+    - owncloud
+
+- name: Update owncloud instance
+  git: update=yes force=yes recursive=yes version="{{ item[1].version }}" depth=1 dest="{{ item[1].docroot }}" repo="{{ item[1].repo }}"
+  when: stat_owncloud_docroot.results[0].stat.isdir is defined and stat_owncloud_docroot.results[0].stat.isdir == true
   with_items: owncloud_instances|dictsort
   tags:
     - owncloud
@@ -29,8 +44,16 @@
   tags:
     - owncloud
 
+- name: register if the owncloud datadir already exists
+  stat: path={{ item[1].datadirectory }}
+  with_items: owncloud_instances|dictsort
+  register: stat_owncloud_datadirectory
+  tags:
+    - owncloud
+
 - name: Create data directory
-  file: state=directory path="{{ item[1].config.datadirectory }}" owner={{ item[1].server_user }} group={{ item[1].server_group }} mode=0770 recurse=yes
+  file: state=directory path="{{ item[1].datadirectory }}" owner={{ item[1].server_user }} group={{ item[1].server_group }} mode=0770 recurse=yes
+  when: stat_owncloud_datadirectory.results[0].stat.isdir is not defined or stat_owncloud_datadirectory.results[0].stat.isdir == false
   with_items: owncloud_instances|dictsort
   tags:
     - owncloud
@@ -41,9 +64,15 @@
   tags:
     - owncloud
 
+- name: debug stuff
+  debug: msg="message is {{ item.value.config }}" var=item.value.config
+  with_dict: owncloud_instances
+  tags:
+    - ownclouddebug
+
 - name: Set custom config values in config/config.php.
   lineinfile: regexp="{{ item.regex }}" line="{{ item.value }}" dest="{{ item[1].docroot }}/config/config.php"
-  with_items: owncloud_instances.config|dictsort
+  with_items: owncloud_instances|dictsort
   tags:
     - owncloud
 
