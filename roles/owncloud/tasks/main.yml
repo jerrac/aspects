@@ -19,65 +19,61 @@
     - owncloud
 
 - name: Clone owncloud into designated docroot
-  git: force=yes recursive=yes version="{{ item[1].version }}" depth=1 dest="{{ item[1].docroot }}" repo="{{ item[1].repo }}"
+  git: force=yes recursive=yes version="{{ item.value.version }}" depth=1 dest="{{ item.value.docroot }}" repo="{{ item.value.repo }}"
   when: stat_owncloud_docroot.results[0].stat.isdir is not defined or stat_owncloud_docroot.results[0].stat.isdir != true
-  with_items: owncloud_instances|dictsort
+  with_dict: owncloud_instances
   tags:
     - owncloud
 
 - name: Update owncloud instance
-  git: update=yes force=yes recursive=yes version="{{ item[1].version }}" depth=1 dest="{{ item[1].docroot }}" repo="{{ item[1].repo }}"
+  git: update=yes force=yes recursive=yes version="{{ item.value.version }}" depth=1 dest="{{ item.value.docroot }}" repo="{{ item.value.repo }}"
   when: stat_owncloud_docroot.results[0].stat.isdir is defined and stat_owncloud_docroot.results[0].stat.isdir == true
-  with_items: owncloud_instances|dictsort
+  with_dict: owncloud_instances
   tags:
     - owncloud
 
 - name: Set upload_max_filesize in .htaccess file.
-  lineinfile: regexp="/php_value upload_max_filesize [\d]+[KMG]?/" line="php_value upload_max_filesize {{ item[1].upload_max_filesize }}" dest="{{ item[1].docroot }}/.htaccess"
-  with_items: owncloud_instances|dictsort
+  lineinfile: regexp="/php_value upload_max_filesize [\d]+[KMG]?/" line="php_value upload_max_filesize {{ item.value.upload_max_filesize }}" dest="{{ item.value.docroot }}/.htaccess"
+  with_dict: owncloud_instances
   tags:
     - owncloud
 
 - name: Set post_max_size in .htaccess file.
-  lineinfile: regexp="/php_value post_max_size [\d]+[KMG]?/" line="php_value post_max_size {{ item[1].post_max_size }}" dest="{{ item[1].docroot }}/.htaccess"
-  with_items: owncloud_instances|dictsort
+  lineinfile: regexp="/php_value post_max_size [\d]+[KMG]?/" line="php_value post_max_size {{ item.value.post_max_size }}" dest="{{ item.value.docroot }}/.htaccess"
+  with_dict: owncloud_instances
   tags:
     - owncloud
 
 - name: register if the owncloud datadir already exists
-  stat: path={{ item[1].datadirectory }}
-  with_items: owncloud_instances|dictsort
+  stat: path={{ item.value.datadirectory }}
+  with_dict: owncloud_instances
   register: stat_owncloud_datadirectory
   tags:
     - owncloud
 
 - name: Create data directory
-  file: state=directory path="{{ item[1].datadirectory }}" owner={{ item[1].server_user }} group={{ item[1].server_group }} mode=0770 recurse=yes
+  file: state=directory path="{{ item.value.datadirectory }}" owner={{ item.value.server_user }} group={{ item.value.server_group }} mode=0770 recurse=yes
   when: stat_owncloud_datadirectory.results[0].stat.isdir is not defined or stat_owncloud_datadirectory.results[0].stat.isdir == false
-  with_items: owncloud_instances|dictsort
+  with_dict: owncloud_instances
   tags:
     - owncloud
 
 - name: Set docroot directory permissions
-  file: state=directory path="{{ item[1].docroot }}" owner={{ item[1].server_user }} group={{ item[1].server_group }} mode=0755 recurse=yes
-  with_items: owncloud_instances|dictsort
-  tags:
-    - owncloud
-
-- name: debug stuff
-  debug: msg="message is {{ item.value.config }}" var=item.value.config
+  file: state=directory path="{{ item.value.docroot }}" owner={{ item.value.server_user }} group={{ item.value.server_group }} mode=0755 recurse=yes
   with_dict: owncloud_instances
   tags:
-    - ownclouddebug
+    - owncloud
 
-- name: Set custom config values in config/config.php.
-  lineinfile: regexp="{{ item.regex }}" line="{{ item.value }}" dest="{{ item[1].docroot }}/config/config.php"
-  with_items: owncloud_instances|dictsort
+- name: Run config template
+  template: src=config.php.j2 dest={{ item.value.docroot }}/config/config.php owner={{ item.value.server_user }} group={{ item.value.server_group }} mode=0640
+  with_dict: owncloud_instances
   tags:
     - owncloud
 
-#- name: Run config template
-#  template: src=config.php.j2 dest={{ item[1].docroot }}/config/config.php owner={{ item[1].server_user }} group={{ item[1].server_group }} mode=0640
-#  with_items: owncloud_instances|dictsort
-#  tags:
-#    - owncloud
+- name: Set custom config values in config/config.php.
+  lineinfile: regexp="{{ item.1.regex }}" line="{{ item.1.value }}" dest="{{ item.0.docroot }}/config/config.php"
+  with_subdict:
+    - owncloud_instances
+    - config
+  tags:
+    - owncloud

@@ -15,3 +15,6 @@ hosts
 
 # assume an host vars in the 192.168.88.x range are local vm's.
 host_vars/192.168.88.*
+
+# ignore .pyc files
+*.pyc
