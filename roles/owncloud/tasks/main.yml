@@ -64,16 +64,33 @@
   tags:
     - owncloud
 
-- name: Run config template
-  template: src=config.php.j2 dest={{ item.value.docroot }}/config/config.php owner={{ item.value.server_user }} group={{ item.value.server_group }} mode=0640
+#- name: Run config template
+#  template: src=config.php.j2 dest={{ item.value.docroot }}/config/config.php owner={{ item.value.server_user }} group={{ item.value.server_group }} mode=0640
+#  with_dict: owncloud_instances
+#  tags:
+#    - owncloud
+
+- name: register if the owncloud config file exists
+  stat: path={{ item.value.docroot }}/config/config.php
   with_dict: owncloud_instances
+  register: stat_owncloud_configfile
   tags:
     - owncloud
+    - owncloudconfigtest
+
+- debug: var=item.1
+  with_subdict:
+    - owncloud_instances
+    - config
+  tags:
+    - owncloudconfigtest
 
 - name: Set custom config values in config/config.php.
-  lineinfile: regexp="{{ item.1.regex }}" line="{{ item.1.value }}" dest="{{ item.0.docroot }}/config/config.php"
+  replace: regexp={{ item.1.regex }} replace="{{ item.1.value }}" dest="{{ item.0.docroot }}/config/config.php"
+  when: stat_owncloud_configfile.results.0.stat.isreg is defined and stat_owncloud_configfile.results.0.stat.isreg == true
   with_subdict:
     - owncloud_instances
     - config
   tags:
     - owncloud
+    - owncloudconfigtest
