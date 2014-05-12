@@ -1,0 +1,40 @@
+---
+# file: roles/ufw/tasks/main.yml
+
+- name: ensure ufw is installed Debian style
+  when: ansible_os_family == "Debian"
+  apt: pkg=ufw state=latest
+  tags:
+    - ufw
+
+- debug: var=item
+  with_dict: ufw_default_policy
+  tags:
+    - debug
+
+- name: set firewall state and policy
+  ufw: state="{{ item.value.state }}" policy="{{ item.value.policy }}"
+  with_dict: ufw_default_policy
+  tags:
+    - ufw
+
+#- name: set simple open or closed ports
+#  when: item.value.proto is not defined and item.value.rule is defined and item.value.port is defined
+#  ufw: rule="{{ item.value.rule }}" port="{{ item.value.port }}"
+#  with_dict: ufw_open_close_port
+#  tags:
+#    - ufw
+
+- name: set open/close port with protocol
+  when: item.value.proto is defined and item.value.rule is defined and item.value.port is defined
+  ufw: rule="{{ item.value.rule }}" port="{{ item.value.port }}" proto="{{ item.value.proto }}"
+  with_dict: ufw_open_close_port
+#  with_dict: ufw_open_close_port_proto
+  tags:
+    - ufw
+
+#- name: set simple open or closed ports from IP
+#  ufw: rule="{{ item.value.rule }}" port="{{ item.value.port }}" from_ip="{{ item.value.from_ip }}" to_ip="{{ item.value.to_ip }}"
+#  with_dict: ufw_open_close_port_from_to_ip
+#  tags:
+#    - ufw
