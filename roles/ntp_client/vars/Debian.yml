@@ -1,0 +1,4 @@
+---
+# file: roles/ntp_client/vars/Debian.yml
+
+ntp_client_service_name: "ntp"

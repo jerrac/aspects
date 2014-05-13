@@ -1,0 +1,25 @@
+---
+# file: roles/ntp_client/tasks/main.yml
+
+- name: include correct vars file
+  include_vars: "{{ ansible_os_family }}.yml"
+  tags:
+    - ntp
+
+- name: Install ntp with apt
+  when: ansible_os_family == "Debian"
+  apt: state=latest pkg=ntp
+  tags:
+    - ntp
+
+- name: Install ntp with yum
+  when: ansible_os_family == "RedHat"
+  yum: state=latest pkg=ntp
+  tags:
+    - ntp
+
+- name: Set ntp.conf template
+  template: src=ntp.conf.j2 dest=/etc/ntp.conf
+  notify: restart ntp
+  tags:
+    - ntp
