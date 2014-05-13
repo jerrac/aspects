@@ -5,11 +5,19 @@ Aspects aims to provide a set of Ansible roles that will allow you to build a se
 
 You should be familiar with the official Ansible documentation at http://docs.ansible.com/ prior to using Aspects.
 
+Note: with the release of https://galaxy.ansible.com/ how this project works needs some refinement. 
+
 ## Roles
 Name | Status | Supported OS's | Notes
 -----|--------|----------------|------
 Apache2 | Testing |<ul><li>Ubuntu 12.04</li><li>CentOS 6.5</li></ul>| Currently only Apache 2.2. Apache 2.4 will get its own role.
 PHP | Testing |<ul><li>Ubuntu 12.04</li><li>CentOS 6.5</li></ul>| Currently testing PHP 5.3. Older versions will not be supported. Newer versions should work, but there may be issues.
+mysql-client | Dev |<ul><li>Ubuntu 12.04</li></ul>| Don't Use
+mysql-server | Dev |<ul><li>Ubuntu 12.04</li></ul>| Don't Use
+ntp_client | Dev |<ul><li>Ubuntu 12.04</li></ul>| Don't Use
+owncloud | Dev |<ul><li>Ubuntu 12.04</li></ul>| Don't Use
+tinytinyrss | Dev |<ul><li>Ubuntu 12.04</li></ul>| Don't Use
+ufw | Dev |<ul><li>Ubuntu 12.04</li></ul>| Don't Use
 
 ## Setup
 * Set ```hash_behaviour=merge``` in your ansible.cfg file. You can copy the default that comes with Aspects, or set in whatever default configureation file you choose to use. See the official documentation on where to find them, and what other options you can use.
