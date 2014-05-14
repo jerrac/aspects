@@ -1,0 +1,27 @@
+---
+# defaults file for common_packages
+common_packages:
+  ssh:
+    state: "default"
+    Debian: ssh
+    RedHat: ssh
+  locate:
+    state: "default"
+    Debian: locate
+    RedHat: mlocate
+  git:
+    state: "default"
+    Debian: git
+    RedHat: git
+  facter:
+    state: "default"
+    Debian: facter
+    RedHat: facter
+  htop:
+    state: "default"
+    Debian: htop
+    RedHat: false
+  vim:
+    state: "default"
+    Debian: vim
+    RedHat: vim
