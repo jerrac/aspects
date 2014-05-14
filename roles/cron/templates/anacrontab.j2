@@ -1,0 +1,21 @@
+###############################################################
+## This file is managed by Ansible.
+## Local changes will be overwritten next time Ansible is run.
+## DO NOT MAKE LOCAL CHANGES
+## {{ ansible_managed }}
+###############################################################
+# /etc/anacrontab: configuration file for anacron
+# See anacron(8) and anacrontab(5) for details.
+
+SHELL={{ cron_config.shell }}
+PATH={{ cron_config.path }}
+MAILTO={{ cron_config.mailto }}
+# the maximal random delay added to the base delay of the jobs
+RANDOM_DELAY={{ cron_config.random_delay }}
+# the jobs will be started during the following hours only
+START_HOURS_RANGE={{ cron_config.start_hours_range }}
+
+#period in days   delay in minutes   job-identifier   command
+{{ cron_config.anacron_daily_period }} {{ cron_config.anacron_daily_delay }} {{ cron_config.anacron_daily_jobidentifier }} {{ cron_config.anacron_daily_command }}
+{{ cron_config.anacron_weekly_period }} {{ cron_config.anacron_weekly_delay }} {{ cron_config.anacron_weekly_jobidentifier }} {{ cron_config.anacron_weekly_command }}
+{{ cron_config.anacron_monthly_period }} {{ cron_config.anacron_monthly_delay }} {{ cron_config.anacron_monthly_jobidentifier }} {{ cron_config.anacron_monthly_command }}

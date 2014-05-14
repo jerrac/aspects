@@ -1,0 +1,13 @@
+---
+# tasks file for cron
+- name: Set crontab template
+  template: src="crontab.j2" dest="/etc/crontab"
+  tags:
+    cron
+    crontab
+
+- name: Set anacrontab template
+  template: src="anacrontab.j2" dest="/etc/anacrontab"
+  tags:
+    cron
+    anacrontab
