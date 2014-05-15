@@ -47,3 +47,18 @@ cron_config:
   crontab_monthly_dow: "*"
   crontab_monthly_user: "root"
   crontab_monthly_command: "test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )"
+
+# Example cron job.
+# To add per host, just add a job with a new key.
+#cron_jobs:
+#  testecho:
+#    name: "Test echo job."
+#    state: "absent"
+#    backup: "no"
+#    minute: "23"
+#    hour: "3"
+#    day: "5"
+#    weekday: "5"
+#    month: "2"
+#    user: "root"
+#    job: "echo noghlsdkjf > /dev/null"
