@@ -7,6 +7,3 @@
 [submodule "roles/aspects_mysql_client"]
 	path = roles/aspects_mysql_client
 	url = git@github.com:LaneCommunityCollege/aspects_mysql_client.git
-[submodule "roles/aspects_ntp_client"]
-	path = roles/aspects_ntp_client
-	url = git@github.com:LaneCommunityCollege/aspects_ntp_client.git
