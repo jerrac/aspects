@@ -1,4 +1,0 @@
----
-# file: roles/ntp_client/vars/RedHat.yml
-
-ntp_client_service_name: "ntpd"

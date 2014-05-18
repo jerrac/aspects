@@ -1,7 +1,0 @@
-# {{ ansible_managed }}
-
-{% for app in ufw_custom_apps %}
-[{{ ufw_custom_apps[app].name }}]
-description={{ ufw_custom_apps[app].description }}
-ports={{ ufw_custom_apps[app].ports }}
-{% endfor %}

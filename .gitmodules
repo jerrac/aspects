@@ -1,0 +1,12 @@
+[submodule "roles/aspects_ufw"]
+	path = roles/aspects_ufw
+	url = git@github.com:LaneCommunityCollege/aspects_ufw.git
+[submodule "roles/aspects_cron"]
+	path = roles/aspects_cron
+	url = git@github.com:LaneCommunityCollege/aspects_cron.git
+[submodule "roles/aspects_mysql_client"]
+	path = roles/aspects_mysql_client
+	url = git@github.com:LaneCommunityCollege/aspects_mysql_client.git
+[submodule "roles/aspects_ntp_client"]
+	path = roles/aspects_ntp_client
+	url = git@github.com:LaneCommunityCollege/aspects_ntp_client.git

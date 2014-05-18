@@ -1,8 +1,0 @@
----
-# file: roles/mysql_server/tasks/users.yml
-- name: ensure database users exist
-  mysql_user: state=present name={{ item.name }} password={{ item.password }} host={{ item.host }} priv={{ item.priv }} login_host={{ item.dbhost }} login_user={{ mysql_server_root_user }} login_password={{ mysql_server.root_password }}
-  with_items: mysql_server_users|default([])
-  tags:
-    - mysql_server
-    - mysql_users
