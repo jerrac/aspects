@@ -1,4 +1,0 @@
----
-# file: roles/apache2/tasks/main.yml
-- include: apache2.yml
-- include: apache2-vhosts.yml
