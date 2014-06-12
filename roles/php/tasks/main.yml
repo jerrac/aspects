@@ -1,4 +1,0 @@
----
-# file: roles/php/tasks/main.yml
-- include: php5.yml
-- include: apc.yml

@@ -19,3 +19,15 @@
 [submodule "roles/aspects_apache2"]
 	path = roles/aspects_apache2
 	url = git@github.com:LaneCommunityCollege/aspects_apache2.git
+[submodule "roles/aspects_logstash"]
+	path = roles/aspects_logstash
+	url = git@github.com:LaneCommunityCollege/aspects_logstash.git
+[submodule "roles/aspects_elasticsearch"]
+	path = roles/aspects_elasticsearch
+	url = git@github.com:LaneCommunityCollege/aspects_elasticsearch.git
+[submodule "roles/aspects_logrotate"]
+	path = roles/aspects_logrotate
+	url = git@github.com:LaneCommunityCollege/aspects_logrotate.git
+[submodule "roles/aspects_oracle_java"]
+	path = roles/aspects_oracle_java
+	url = git@github.com:LaneCommunityCollege/aspects_oracle_java.git
