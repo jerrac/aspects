@@ -1,6 +1,6 @@
 ---
 # file: roles/owncloud/meta/main.yml
-dependencies:
-  - { role: apache2 }
-  - { role: php }
-  - { role: mysql_server }
+dependencies: []
+#  - { role: aspects_apache2 }
+#  - { role: aspects_php }
+#  - { role: aspects_mysql_server }

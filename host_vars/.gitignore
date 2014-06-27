@@ -1,1 +1,4 @@
 # file host_vars/.gitignore forces the host_vars directory to exist in the git repo.
+*
+# Except this file
+!.gitignore
