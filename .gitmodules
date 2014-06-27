@@ -40,3 +40,6 @@
 [submodule "roles/aspects_unattended_upgrades"]
 	path = roles/aspects_unattended_upgrades
 	url = git@github.com:LaneCommunityCollege/aspects_unattended_upgrades.git
+[submodule "roles/aspects_yum_cron"]
+	path = roles/aspects_yum_cron
+	url = git@github.com:LaneCommunityCollege/aspects_yum_cron.git
