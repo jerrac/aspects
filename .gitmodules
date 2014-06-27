@@ -37,3 +37,6 @@
 [submodule "roles/aspects_openssh"]
 	path = roles/aspects_openssh
 	url = git@github.com:LaneCommunityCollege/aspects_openssh.git
+[submodule "roles/aspects_unattended_upgrades"]
+	path = roles/aspects_unattended_upgrades
+	url = git@github.com:LaneCommunityCollege/aspects_unattended_upgrades.git
