@@ -34,3 +34,6 @@
 [submodule "roles/aspects_local_users"]
 	path = roles/aspects_local_users
 	url = git@github.com:LaneCommunityCollege/aspects_local_users.git
+[submodule "roles/aspects_openssh"]
+	path = roles/aspects_openssh
+	url = git@github.com:LaneCommunityCollege/aspects_openssh.git
