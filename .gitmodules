@@ -43,3 +43,6 @@
 [submodule "roles/aspects_yum_cron"]
 	path = roles/aspects_yum_cron
 	url = git@github.com:LaneCommunityCollege/aspects_yum_cron.git
+[submodule "roles/aspects_mysql_server"]
+	path = roles/aspects_mysql_server
+	url = git@github.com:LaneCommunityCollege/aspects_mysql_server.git
