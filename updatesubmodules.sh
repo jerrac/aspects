@@ -40,10 +40,10 @@ git fetch origin;
 git checkout master;
 git pull origin master;
 
-#cd "${LOCATION}/roles/aspects_mysql_server"
-#git fetch origin;
-#git checkout master;
-#git pull origin master;
+cd "${LOCATION}/roles/aspects_mysql_server"
+git fetch origin;
+git checkout master;
+git pull origin master;
 
 cd "${LOCATION}/roles/aspects_ntp_client"
 git fetch origin;
