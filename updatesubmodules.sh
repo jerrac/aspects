@@ -35,6 +35,21 @@ git fetch origin;
 git checkout master;
 git pull origin master;
 
+cd "${LOCATION}/roles/aspects_logstash_forwarder"
+git fetch origin;
+git checkout master;
+git pull origin master;
+
+cd "${LOCATION}/roles/aspects_logwatch"
+git fetch origin;
+git checkout master;
+git pull origin master;
+
+cd "${LOCATION}/roles/aspects_monit"
+git fetch origin;
+git checkout master;
+git pull origin master;
+
 cd "${LOCATION}/roles/aspects_mysql_client"
 git fetch origin;
 git checkout master;
