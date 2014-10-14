@@ -10,9 +10,6 @@
 [submodule "roles/aspects_ntp_client"]
 	path = roles/aspects_ntp_client
 	url = git@github.com:LaneCommunityCollege/aspects_ntp_client.git
-[submodule "roles/aspects_common_packages"]
-	path = roles/aspects_common_packages
-	url = git@github.com:LaneCommunityCollege/aspects_common_packages.git
 [submodule "roles/aspects_sudo"]
 	path = roles/aspects_sudo
 	url = git@github.com:LaneCommunityCollege/aspects_sudo.git
