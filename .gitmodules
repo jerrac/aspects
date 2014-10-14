@@ -46,3 +46,12 @@
 [submodule "roles/aspects_mysql_server"]
 	path = roles/aspects_mysql_server
 	url = git@github.com:LaneCommunityCollege/aspects_mysql_server.git
+[submodule "roles/aspects_logstash_forwarder"]
+	path = roles/aspects_logstash_forwarder
+	url = git@github.com:LaneCommunityCollege/aspects_logstash_forwarder.git
+[submodule "roles/aspects_logwatch"]
+	path = roles/aspects_logwatch
+	url = git@github.com:LaneCommunityCollege/aspects_logwatch.git
+[submodule "roles/aspects_monit"]
+	path = roles/aspects_monit
+	url = git@github.com:LaneCommunityCollege/aspects_monit.git
