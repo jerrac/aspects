@@ -52,3 +52,6 @@
 [submodule "roles/aspects_monit"]
 	path = roles/aspects_monit
 	url = git@github.com:LaneCommunityCollege/aspects_monit.git
+[submodule "roles/aspects_apache22"]
+	path = roles/aspects_apache22
+	url = git@github.com:LaneCommunityCollege/aspects_apache22.git

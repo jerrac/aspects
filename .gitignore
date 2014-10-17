@@ -9,6 +9,7 @@ ansible.cfg
 
 # ignore site.yml
 site.yml
+testing.yml
 
 # ignore hosts
 hosts
@@ -18,3 +19,5 @@ host_vars/192.168.88.*
 
 # ignore .pyc files
 *.pyc
+
+# ignore in development roles

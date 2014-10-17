@@ -5,7 +5,7 @@ git fetch origin;
 git checkout master;
 git pull origin master;
 
-cd "${LOCATION}/roles/aspects_common_packages"
+cd "${LOCATION}/roles/aspects_apache22"
 git fetch origin;
 git checkout master;
 git pull origin master;
