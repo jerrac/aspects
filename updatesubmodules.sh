@@ -75,10 +75,10 @@ git fetch origin;
 git checkout master;
 git pull origin master;
 
-#cd "${LOCATION}/roles/aspects_php"
-#git fetch origin;
-#git checkout master;
-#git pull origin master;
+cd "${LOCATION}/roles/aspects_php"
+git fetch origin;
+git checkout master;
+git pull origin master;
 
 cd "${LOCATION}/roles/aspects_sudo"
 git fetch origin;
