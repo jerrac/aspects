@@ -10,6 +10,11 @@ git fetch origin;
 git checkout master;
 git pull origin master;
 
+cd "${LOCATION}/roles/aspects_apache24"
+git fetch origin;
+git checkout master;
+git pull origin master;
+
 cd "${LOCATION}/roles/aspects_cron"
 git fetch origin;
 git checkout master;

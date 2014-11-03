@@ -58,3 +58,6 @@
 [submodule "roles/aspects_php"]
 	path = roles/aspects_php
 	url = git@github.com:LaneCommunityCollege/aspects_php.git
+[submodule "roles/aspects_apache24"]
+	path = roles/aspects_apache24
+	url = git@github.com:LaneCommunityCollege/aspects_apache24.git
