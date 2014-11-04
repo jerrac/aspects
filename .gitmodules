@@ -13,9 +13,6 @@
 [submodule "roles/aspects_sudo"]
 	path = roles/aspects_sudo
 	url = git@github.com:LaneCommunityCollege/aspects_sudo.git
-[submodule "roles/aspects_apache2"]
-	path = roles/aspects_apache2
-	url = git@github.com:LaneCommunityCollege/aspects_apache2.git
 [submodule "roles/aspects_logstash"]
 	path = roles/aspects_logstash
 	url = git@github.com:LaneCommunityCollege/aspects_logstash.git

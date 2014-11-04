@@ -1,0 +1,7 @@
+[test]
+192.168.88.2 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_sudo_pass=vagrant
+192.168.88.3 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_sudo_pass=vagrant
+192.168.88.4 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_sudo_pass=vagrant
+192.168.88.5 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_sudo_pass=vagrant
+192.168.88.6 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_sudo_pass=vagrant
+192.168.88.7 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_sudo_pass=vagrant
