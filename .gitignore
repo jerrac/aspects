@@ -9,3 +9,6 @@ ansible.cfg
 
 # ignore .pyc files
 *.pyc
+
+# ignore .vagrant directory
+.vagrant/*
