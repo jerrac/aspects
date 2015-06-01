@@ -1,9 +1,0 @@
----
-# file: site.yml
-# rename to site.yml
-- hosts: apache
-  roles:
-    - apache2
-- hosts: php
-  roles: 
-    - php

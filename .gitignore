@@ -7,15 +7,5 @@ tmp/*
 # ignore local ansible.cfg
 ansible.cfg
 
-# ignore site.yml
-site.yml
-testing.yml
-
-# assume an host vars in the 192.168.88.x range are local vm's.
-host_vars/192.168.88.*
-
 # ignore .pyc files
 *.pyc
-
-# ignore in development roles
-#roles/aspects_php

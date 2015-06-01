@@ -1,0 +1,26 @@
+---
+# iptable rules that apply to all servers
+aspects_iptables_enabled: True
+aspects_iptables_v4_rules:
+  0defaultpolicy:
+    enabled: True
+    rule: |
+      :INPUT DROP [0:0]
+      :FORWARD DROP [0:0]
+      :OUTPUT ACCEPT [0:0]
+  1dontdistruptexistingconnections:
+    enabled: True
+    rule: |
+      -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+  2acceptpings:
+    enabled: True
+    rule: |
+      -A INPUT -p icmp -j ACCEPT
+  3dontscrewuplo:
+    enabled: True
+    rule: |
+      -A INPUT -i lo -j ACCEPT
+  4acceptnewssh:
+    enabled: True
+    rule: |
+      -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT

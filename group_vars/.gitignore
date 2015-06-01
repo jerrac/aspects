@@ -1,5 +1,0 @@
-# file group_vars/.gitignore forces the group_vars directory to exist in the git repo.
-*
-# Except this file
-!.gitignore
-!all.yml

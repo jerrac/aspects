@@ -1,40 +1,71 @@
 # Aspects
 
 ## What is this?
-Aspects aims to provide a set of Ansible roles that will allow you to build a server with a minimal amount of work.
+Aspects is a test and example project for the various aspects_ roles.
+
+A set of vagrant vm's is configured with example configuration.
 
 You should be familiar with the official Ansible documentation at http://docs.ansible.com/ prior to using Aspects.
 
-Note: with the release of https://galaxy.ansible.com/ how this project works needs some refinement. 
-
 ## Roles
-Name | Status | Supported OS's | Notes
------|--------|----------------|------
-Apache2 | Testing |<ul><li>Ubuntu 12.04</li><li>CentOS 6.5</li></ul>| Currently only Apache 2.2. Apache 2.4 will get its own role.
-PHP | Testing |<ul><li>Ubuntu 12.04</li><li>CentOS 6.5</li></ul>| Currently testing PHP 5.3. Older versions will not be supported. Newer versions should work, but there may be issues.
-mysql-client | Dev |<ul><li>Ubuntu 12.04</li></ul>| Don't Use
-mysql-server | Dev |<ul><li>Ubuntu 12.04</li></ul>| Don't Use
-ntp_client | Dev |<ul><li>Ubuntu 12.04</li></ul>| Don't Use
-owncloud | Dev |<ul><li>Ubuntu 12.04</li></ul>| Don't Use
-tinytinyrss | Dev |<ul><li>Ubuntu 12.04</li></ul>| Don't Use
-ufw | Dev |<ul><li>Ubuntu 12.04</li></ul>| Don't Use
+Aspects expects all aspects_ roles to live in a configured role_path location. The default is /etc/ansible/roles.
+
+Make sure you clone all needed roles to that path.
+
+To find the roles, search for "aspects_" on the following organization and user accounts:
+
+* https://github.com/jerrac
+* https://github.com/LaneCommunityCollege
 
 ## Setup
-* Set ```hash_behaviour=merge``` in your ansible.cfg file. You can copy the default that comes with Aspects, or set in whatever default configureation file you choose to use. See the official documentation on where to find them, and what other options you can use.
-* Rename the hosts-default file to hosts (hosts is in .gitignore)
-** Modify the hosts file as appropriate. Add your hosts to each role that it should use.
-* Create appropriate group_vars and host_vars files according to your server needs.
-* Rename site.yml-default to site.yml. This is the file you will run with ansible-playbook.
+* Install Ansible. http://docs.ansible.com/
+** I usually run from a recent checkout of the devel branch. So far it has had few issues.
+* Install vagrant. http://www.vagrantup.com/
+* Install VirtualBox. https://www.virtualbox.org/ 
+** Most features should work with other vm providers, but virtualbox is what I use, so compatibility is not guaranteed.
+* Configure ansible.cfg.
+** I suggest using https://github.com/ansible/ansible/blob/devel/examples/ansible.cfg as the base.
+** Set ```hash_behaviour=merge```.
+** Make sure it is set to search the location where you cloned the aspects_ roles.
+* Add the lines from the etc-hosts-dist file to your /etc/hosts file, or whereever your systems hosts file lives.
+
+## Basic Architechture
+
+Aspects has several vm's configured:
+
+* vm.ubuntu.lab (192.168.88.2) running Ubuntu 12.04.
+* vm.centos.lab (192.168.88.3) running CentOS 6.5.
+* vm.sles.lab (192.168.88.4) running SLES 11 SP1.
+* vm.oracle59.lab (192.168.88.5) running Oracle 5.9.
+* vm.ubuntutrusty.lab (192.168.88.6) running Ubuntu 14.04.
+* vm.wheezy.lab (192.168.88.7) running Debian Wheezy.
+
+See the various group_vars and host_vars files for detailed examples.
+
+# Ansible Vault
+ansible-vault is a handy tool that lets you encrypt variable files. This is especially handy for avoiding having to enter your sudo password all the time.
+
+For demonstration purposes, I have created the group_vars/all/local.user to tell ansible what user to run as. The file is encrypted with the password ```password```.
+
+I also have stored that password in .vaultpassword.txt.
+
+To view it, just run:
+
+    ansible-vault --vault-password-file .vaultpassword.txt view group_vars/all/local.user
+
+To edit, replace ```view``` with ```edit```. See ansible docs for more detailed information.
+
+Remember that all vault encrypted files must be encrypted with the same password if they are to be used together.
 
 ## Running
 ### Run everything
-```ansible-playbook -i <your host file> --ask-sudo-pass --sudo site.yml```
+```ansible-playbook -i aspects.hosts.ini --ansible-vault-file .vaultpassword.txt aspects.play.all.yml```
 ### Run everything on a single host
-```ansible-playbook -i <your host file> --ask-sudo-pass --sudo --limit="<hostname from hosts file>" site.yml```
+```ansible-playbook -i aspects.hosts.ini --ansible-vault-file .vaultpassword.txt --limit="<hostname from hosts file>" aspects.play.all.yml```
 ### Run a specific role on everything
-```ansible-playbook -i <your host file> --ask-sudo-pass --sudo --tags="<role name>" site.yml```
+```ansible-playbook -i aspects.hosts.ini --ansible-vault-file .vaultpassword.txt --tags="<role name>" aspects.play.all.yml```
 ### Run a specific role on a specific host
-```ansible-playbook -i <your host file> --ask-sudo-pass --sudo --tags="<role name>" --limit="<hostname from hosts file>" site.yml```
+```ansible-playbook -i aspects.hosts.ini --ansible-vault-file .vaultpassword.txt --tags="<role name>" --limit="<hostname from hosts file>" aspects.play.all.yml```
 ### Other options
 See Ansible's official documentation.
   

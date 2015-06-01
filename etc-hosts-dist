@@ -1,0 +1,7 @@
+# Aspects Vagrant VM's
+192.168.88.2 vm.ubuntu.lab
+192.168.88.3 vm.centos.lab
+192.168.88.4 vm.sles.lab
+192.168.88.5 vm.oracle59.lab
+192.168.88.6 vm.ubuntutrusty.lab
+192.168.88.7 vm.wheezy.lab

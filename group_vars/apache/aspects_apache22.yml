@@ -1,0 +1,416 @@
+---
+aspects_apache22_mods:
+  modautoindex:
+    Debian:
+      enable: False
+      links:
+        conffile: "autoindex.conf"
+        loadfile: "autoindex.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule autoindex_module modules/mod_autoindex.so"
+  modinclude:
+    Debian:
+      enable: False
+      links:
+        loadfile: "include.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule include_module modules/mod_include.so"
+  modnegotiation:
+    Debian:
+      enable: False
+      links:
+        loadfile: "negotiation.load"
+        conffile: "negotiation.conf"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule negotiation_module modules/mod_negotiation.so"
+  modauthbasic:
+    Debian:
+      enable: False
+      links:
+        loadfile: "auth_basic.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule auth_basic_module modules/mod_auth_basic.so"
+  modauthnfile:
+    Debian:
+      enable: False
+      links:
+        loadfile: "authn_file.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule authn_file_module modules/mod_authn_file.so"
+  modauthzdefault:
+    Debian:
+      enable: True
+      links:
+        loadfile: "authz_default.load"
+    RedHat:
+      enable: True
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule authz_default_module modules/mod_authz_default.so"
+  modauthzgroupfile:
+    Debian:
+      enable: False
+      links:
+        loadfile: "authz_groupfile.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule authz_groupfile_module modules/mod_authz_groupfile.so"
+  modauthzhost:
+    Debian:
+      enable: True
+      links:
+        loadfile: "authz_host.load"
+    RedHat:
+      enable: True
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule authz_host_module modules/mod_authz_host.so"
+  modauthzuser:
+    Debian:
+      enable: False
+      links:
+        loadfile: "authz_user.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule authz_user_module modules/mod_authz_user.so"
+  modauthnanon:
+    Debian:
+      enable: False
+      links:
+        loadfile: "authn_anon.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule authn_anon_module modules/mod_authn_anon.so"
+  modauthdigest:
+    Debian:
+      enable: False
+      links:
+        loadfile: "auth_digest.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule auth_digest_module modules/mod_auth_digest.so"
+  modauthnalias:
+    Debian:
+      enable: False
+      links:
+        loadfile: "authn_alias.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule authn_alias_module modules/mod_authn_alias.so"
+  modauthndbm:
+    Debian:
+      enable: False
+      links:
+        loadfile: "authn_dbm.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule authn_dbm_module modules/mod_authn_dbm.so"
+  modauthzdbm:
+    Debian:
+      enable: False
+      links:
+        loadfile: "authz_dbm.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule authz_dbm_module modules/mod_authz_dbm.so"
+  modauthzowner:
+    Debian:
+      enable: False
+      links:
+        loadfile: "authz_owner.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule authz_owner_module modules/mod_authz_owner.so"
+  modldap:
+    Debian:
+      enable: False
+      links:
+        loadfile: "ldap.load"
+        conffile: "ldap.conf"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule ldap_module modules/mod_ldap.so"
+  modauthnzldap:
+    Debian:
+      enable: False
+      links:
+        loadfile: "authnz_ldap.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule authnz_ldap_module modules/mod_authnz_ldap.so"
+  modextfilter:
+    Debian:
+      enable: False
+      links:
+        loadfile: "ext_filter.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule ext_filter_module modules/mod_ext_filter.so"
+  modexpires:
+    Debian:
+      enable: True
+      links:
+        loadfile: "expires.load"
+    RedHat:
+      enable: True
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule expires_module modules/mod_expires.so"
+  modheaders:
+    Debian:
+      enable: False
+      links:
+        loadfile: "headers.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule headers_module modules/mod_headers.so"
+  modusertrack:
+    Debian:
+      enable: False
+      links:
+        loadfile: "usertrack.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule usertrack_module modules/mod_usertrack.so"
+  moddav:
+    Debian:
+      enable: False
+      links:
+        loadfile: "dav.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule dav_module modules/mod_dav.so"
+  modinfo:
+    Debian:
+      enable: False
+      links:
+        conffile: "info.conf"
+        loadfile: "info.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule info_module modules/mod_info.so"
+  moddavfs:
+    Debian:
+      enable: False
+      links:
+        conffile: "dav_fs.conf"
+        loadfile: "dav_fs.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule dav_fs_module modules/mod_dav_fs.so"
+  modactions:
+    Debian:
+      enable: False
+      links:
+        loadfile: "actions.load"
+        conffile: "actions.conf"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule actions_module modules/mod_actions.so"
+  modspeling:
+    Debian:
+      enable: False
+      links:
+        loadfile: "speling.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule speling_module modules/mod_speling.so"
+  moduserdir:
+    Debian:
+      enable: False
+      links:
+        loadfile: "userdir.load"
+        conffile: "userdir.conf"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule userdir_module modules/mod_userdir.so"
+  modsubstitute:
+    Debian:
+      enable: False
+      links:
+        loadfile: "substitute.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule substitute_module modules/mod_substitute.so"
+  modrewrite:
+    Debian:
+      enable: True
+      links:
+        loadfile: "rewrite.load"
+    RedHat:
+      enable: True
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule rewrite_module modules/mod_rewrite.so"
+  modproxy:
+    Debian:
+      enable: False
+      links:
+        loadfile: "proxy.load"
+        conffile: "proxy.conf"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule proxy_module modules/mod_proxy.so"
+  modproxybalancer:
+    Debian:
+      enable: False
+      links:
+        loadfile: "proxy_balancer.load"
+        conffile: "proxy_balancer.conf"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule proxy_balancer_module modules/mod_proxy_balancer.so"
+  modproxyftp:
+    Debian:
+      enable: False
+      links:
+        loadfile: "proxy_ftp.load"
+        conffile: "proxy_ftp.conf"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule proxy_ftp_module modules/mod_proxy_ftp.so"
+  modproxyhttp:
+    Debian:
+      enable: False
+      links:
+        loadfile: "proxy_http.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule proxy_http_module modules/mod_proxy_http.so"
+  modproxyajp:
+    Debian:
+      enable: False
+      links:
+        loadfile: "proxy_ajp.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule proxy_ajp_module modules/mod_proxy_ajp.so"
+  modproxyconnect:
+    Debian:
+      enable: False
+      links:
+        loadfile: "proxy_connect.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule proxy_connect_module modules/mod_proxy_connect.so"
+  modcache:
+    Debian:
+      enable: False
+      links:
+        loadfile: "cache.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule cache_module modules/mod_cache.so"
+  moddiskcache:
+    Debian:
+      enable: False
+      links:
+        conffile: "disk_cache.conf"
+        loadfile: "disk_cache.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule disk_cache_module modules/mod_disk_cache.so"
+  modsuexec:
+    Debian:
+      enable: False
+      links:
+        loadfile: "suexec.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule suexec_module modules/mod_suexec.so"
+  modcgi:
+    Debian:
+      enable: False
+      links:
+        loadfile: "cgi.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule cgi_module modules/mod_cgi.so"
+  modversion:
+    Debian:
+      enable: False
+      links:
+        loadfile: "version.load"
+    RedHat:
+      enable: False
+      targetfile: "/etc/httpd/conf/httpd.conf"
+      loadmoduleline: "LoadModule version_module modules/mod_version.so"
+
+aspects_apache22_disabled_directives:
+# ServerSignature because CentOS places it after the conf.d includes, thus custom settings for it will not be applied.
+  ServerSignature:
+    directive: 'ServerSignature'
+    targetfile:
+      RedHat: '/etc/httpd/conf/httpd.conf'
+  IndexOptions:
+    directive: 'IndexOptions'
+    targetfile:
+      RedHat: '/etc/httpd/conf/httpd.conf'
+  AddIconByEncoding:
+    directive: 'AddIconByEncoding'
+    targetfile:
+      RedHat: '/etc/httpd/conf/httpd.conf'
+  AddIconByType:
+    directive: 'AddIconByType'
+    targetfile:
+      RedHat: '/etc/httpd/conf/httpd.conf'
+  AddIcon:
+    directive: 'AddIcon'
+    targetfile:
+      RedHat: '/etc/httpd/conf/httpd.conf'
+  DefaultIcon:
+    directive: 'DefaultIcon'
+    targetfile:
+      RedHat: '/etc/httpd/conf/httpd.conf'
+  ReadmeName:
+    directive: 'ReadmeName'
+    targetfile:
+      RedHat: '/etc/httpd/conf/httpd.conf'
+  HeaderName:
+    directive: 'HeaderName'
+    targetfile:
+      RedHat: '/etc/httpd/conf/httpd.conf'
+  IndexIgnore:
+    directive: 'IndexIgnore'
+    targetfile:
+      RedHat: '/etc/httpd/conf/httpd.conf'
+  LanguagePriority:
+    directive: 'LanguagePriority'
+    targetfile:
+      RedHat: '/etc/httpd/conf/httpd.conf'

@@ -1,0 +1,27 @@
+---
+# Ensure that we gather the vars for all groups
+- hosts:
+  - all
+  - apache
+  - mysql
+  - php
+
+# Apply the apache roles
+- hosts:
+  - apache
+  roles:
+  - aspects_apache24
+  - aspects_apache22
+
+# Apply the php role
+- hosts:
+  - php
+  roles:
+  - aspects_php
+
+# Apply the mysql roles
+- hosts:
+  - mysql
+  roles:
+  - aspects_mysql_server
+  - aspects_mysql_client
