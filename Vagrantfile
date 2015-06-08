@@ -79,5 +79,8 @@ Vagrant.configure("2") do |config|
     wheezy.vm.hostname = "vm.wheezy.lab"
   end
 
+# Official CentOS7 box
+# http://cloud.centos.org/centos/7/vagrant/x86_64/images/CentOS-7-Vagrant-1505-x86_64-01.box
+
 end
 
