@@ -1,0 +1,6 @@
+---
+aspects_iptables_v4_rules:
+  4acceptmysql:
+    enabled: true
+    rule: |
+      -A INPUT -p tcp -m tcp --dport 3306 -j ACCEPT
